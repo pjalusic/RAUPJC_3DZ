@@ -1,0 +1,30 @@
+﻿@model List<ClassLibrary.Classes.TodoItem>
+@{
+    ViewData["Title"] = "To-dos";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+    <div>
+        <br />
+        <a asp-action="Add">Add new to-do item</a> 
+        <br/>
+        <a asp-action="Completed">Completed to-dos</a> 
+        @foreach (var todoItem in Model)
+        {
+            <br /><br />
+            <h>@todoItem.Text</h>
+            <p1> 
+                <br />Date created: @todoItem.DateCreated
+                <br /> 
+                <form asp-action="Index" method="post">Mark as completed</form>
+            </p1>
+        }
+        <br />
+    </div>
+</body>
+</html>

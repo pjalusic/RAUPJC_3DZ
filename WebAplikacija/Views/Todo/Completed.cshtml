@@ -1,0 +1,28 @@
+﻿@model List<ClassLibrary.Classes.TodoItem>
+
+@{
+    ViewData["Title"] = "Completed";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+    <div>
+        @foreach (var todoItem in Model)
+        {
+            <br />
+            <h1>@todoItem.Text</h1>
+            <p1>
+                <br />Date created: @todoItem.DateCreated
+                <br />Date completed: @todoItem.DateCompleted
+            </p1>
+            <br/>
+        }
+        <br />
+        <a asp-controller="Todo" asp-action="Index">Back...</a>
+    </div>
+</body>
+</html>

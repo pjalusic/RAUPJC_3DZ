@@ -1,0 +1,22 @@
+﻿@model WebAplikacija.Models.TodoViewModels.AddTodoViewModel
+@{
+    ViewData["Title"] = "Add new";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add todo</title>
+</head>
+<body>
+    <div>
+        <form asp-action="Add" method="post">
+            <br />
+            Text: <input asp-for="Text" /> <span asp-validation-for="Text"></span> 
+            <input type="submit" />
+        </form>
+        <br />
+        <a asp-controller="Todo" asp-action="Index">Back...</a>
+    </div>
+</body>
+</html>
