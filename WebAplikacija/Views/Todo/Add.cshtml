@@ -7,16 +7,25 @@
 <html>
 <head>
     <title>Add todo</title>
+    <script>
+        function alert()
+        {
+            window.alert("Must not be blank.");
+        }
+    </script>
 </head>
 <body>
-    <div>
-        <form asp-action="Add" method="post">
-            <br />
-            Text: <input asp-for="Text" /> <span asp-validation-for="Text"></span> 
-            <input type="submit" />
-        </form>
-        <br />
-        <a asp-controller="Todo" asp-action="Index">Back...</a>
-    </div>
+<div>
+    <h1>Add a new to-do</h1>
+    <form asp-action="Add" method="post">
+        <br/>
+            <input asp-for="Text"/> <span asp-validation-for="Text"></span> 
+        <input type="submit" value="Save"/>
+    </form>
+    <br/>
+    <a asp-controller="Todo" asp-action="Index">
+        <p1 style="font-size: 15px">Go back...</p1>
+    </a>
+</div>
 </body>
 </html>

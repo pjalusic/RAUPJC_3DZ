@@ -1,7 +1,16 @@
 ﻿@model List<ClassLibrary.Classes.TodoItem>
 @{
-    ViewData["Title"] = "To-dos";
+    ViewData["Title"] = "Active";
 }
+
+
+<script>
+    function ChangeValue(TodoItem item)
+    {
+        ;
+    }
+</script>
+
 
 <!DOCTYPE html>
 <html>
@@ -11,20 +20,37 @@
 <body>
     <div>
         <br />
-        <a asp-action="Add">Add new to-do item</a> 
-        <br/>
-        <a asp-action="Completed">Completed to-dos</a> 
+        <a asp-action="Add">
+            <p1 style="font-size: 18px">
+                Add a new to-do item
+                <img src="images/add_new.png" style="width: 35px; height: 35px;" />
+            </p1>
+        </a> 
+        &emsp;
+        <a asp-action="Completed">
+            <p1 style="font-size: 18px">Completed to-dos
+                <img src="images/completed.jpg" style="width: 35px; height:35px;" />
+            </p1>
+        </a> 
+        <br/><br /><br />
         @foreach (var todoItem in Model)
         {
-            <br /><br />
-            <h>@todoItem.Text</h>
-            <p1> 
-                <br />Date created: @todoItem.DateCreated
-                <br /> 
-                <form asp-action="Index" method="post">Mark as completed</form>
+            <p1 style="font-size: 21px"><b>@todoItem.Text</b></p1>
+            <br />
+            <p1 style="font-size: 16px">@todoItem.DateCreated</p1>
+            <br />
+            <p1 style="font-size: 18px">
+                <a asp-action="Index"> Mark as completed
+                    <img src="images/244376-200.png" style="width:27px;height:27px;" />
+                </a>
             </p1>
-        }
-        <br />
-    </div>
+            if (!Model.IndexOf(todoItem).Equals(Model.Count-1))
+            {
+                <hr/>
+            }
+            
+
+            }
+</div>
 </body>
 </html>

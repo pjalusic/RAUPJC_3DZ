@@ -10,19 +10,25 @@
     <title>title</title>
 </head>
 <body>
-    <div>
-        @foreach (var todoItem in Model)
+<div>
+    <h1>Copleted to-dos</h1>
+    @foreach (var todoItem in Model)
+    {
+        <h1>@todoItem.Text</h1>
+        <p1>
+            <br/>Date created: @todoItem.DateCreated
+            <br/>Date completed: @todoItem.DateCompleted
+        </p1>
+        <br/>
+        if (!Model.IndexOf(todoItem).Equals(Model.Count - 1))
         {
-            <br />
-            <h1>@todoItem.Text</h1>
-            <p1>
-                <br />Date created: @todoItem.DateCreated
-                <br />Date completed: @todoItem.DateCompleted
-            </p1>
-            <br/>
+            <hr />
         }
-        <br />
-        <a asp-controller="Todo" asp-action="Index">Back...</a>
-    </div>
+    }
+    <br/>
+    <a asp-controller="Todo" asp-action="Index">
+        <p1 style="font-size: 15px">Go back...</p1>
+    </a>
+</div>
 </body>
 </html>

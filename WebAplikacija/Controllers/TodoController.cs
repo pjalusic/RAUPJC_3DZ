@@ -34,11 +34,11 @@ namespace WebAplikacija.Controllers
         }
         /*
         [HttpPost]
-        public async Task<IActionResult> Index(TodoItem item)
+        public async Task<IActionResult> Index(Guid Id)
         {
             var resultTask = Task.Run(YourAction);
             ApplicationUser currentUser = await resultTask;
-            _repository.MarkAsCompleted(item.Id, new Guid(currentUser.Id));
+            _repository.MarkAsCompleted(Id, new Guid(currentUser.Id));
             return View();
         }
         */
@@ -54,7 +54,7 @@ namespace WebAplikacija.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Add(AddTodoViewModel model)
         {
