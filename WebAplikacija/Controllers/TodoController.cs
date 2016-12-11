@@ -27,27 +27,33 @@ namespace WebAplikacija.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var resultTask = Task.Run(YourAction);
-            ApplicationUser currentUser = await resultTask;
-            var todos = _repository.GetActive(new Guid(currentUser.Id));
+            Guid userId = await Task.Run(YourAction);
+            var todos = _repository.GetActive(userId);
             return View(todos);
         }
-        /*
-        [HttpPost]
-        public async Task<IActionResult> Index(Guid Id)
-        {
-            var resultTask = Task.Run(YourAction);
-            ApplicationUser currentUser = await resultTask;
-            _repository.MarkAsCompleted(Id, new Guid(currentUser.Id));
-            return View();
-        }
-        */
+        
+        
         public async Task<IActionResult> Completed()
         {
-            var resultTask = Task.Run(YourAction);
-            ApplicationUser currentUser = await resultTask;
-            var todos = _repository.GetCompleted(new Guid(currentUser.Id));
+            Guid userId = await Task.Run(YourAction);
+            var todos = _repository.GetCompleted(userId);
             return View(todos);
+        }
+
+        [HttpGet("Todo/MarkAsCompleted/{id}")]
+        public async Task<IActionResult> MarkAsCompleted(Guid id)
+        {
+            Guid userId = await Task.Run(YourAction);
+            _repository.MarkAsCompleted(id, userId);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("Todo/Delete/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            Guid userId = await Task.Run(YourAction);
+            _repository.Remove(id, userId);
+            return RedirectToAction("Completed");
         }
 
         public IActionResult Add()
@@ -58,9 +64,8 @@ namespace WebAplikacija.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddTodoViewModel model)
         {
-            var resultTask = Task.Run(YourAction);
-            ApplicationUser currentUser = await resultTask;
-            TodoItem myTodoItem = new TodoItem(model.Text, new Guid(currentUser.Id));
+            Guid userId = await Task.Run(YourAction);
+            TodoItem myTodoItem = new TodoItem(model.Text, userId);
             if (ModelState.IsValid)
             {
                 _repository.Add(myTodoItem);
@@ -74,10 +79,11 @@ namespace WebAplikacija.Controllers
             return View();
         }
 
-        private async Task<ApplicationUser> YourAction()
+        private async Task<Guid> YourAction()
         {
             // Get currently logged -in user using userManager
-            return await _userManager.GetUserAsync(HttpContext.User);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return new Guid(user.Id);
             
         }
 

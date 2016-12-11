@@ -12,12 +12,20 @@
 <body>
 <div>
     <h1>Copleted to-dos</h1>
+    <br /><br />
     @foreach (var todoItem in Model)
     {
-        <h1>@todoItem.Text</h1>
-        <p1>
-            <br/>Date created: @todoItem.DateCreated
-            <br/>Date completed: @todoItem.DateCompleted
+        <p1 style="font-size: 21px"><b>@todoItem.Text</b></p1>
+        <br />
+        <p1 style="font-size: 16px">
+            Created: @todoItem.DateCreated
+            <br/>Completed: @todoItem.DateCompleted
+        </p1>
+        <p1 style="font-size: 18px">
+            <a asp-controller="Todo" asp-action="Delete" asp-route-id="@todoItem.Id">
+                Delete
+                <img src="images/delete.png" style="width:27px;height:27px;" />
+            </a>
         </p1>
         <br/>
         if (!Model.IndexOf(todoItem).Equals(Model.Count - 1))
@@ -25,9 +33,9 @@
             <hr />
         }
     }
-    <br/>
+    <br/><br/>
     <a asp-controller="Todo" asp-action="Index">
-        <p1 style="font-size: 15px">Go back...</p1>
+        <p1 style="font-size: 17px">Go back...</p1>
     </a>
 </div>
 </body>
